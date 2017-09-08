@@ -15,7 +15,7 @@ This repository provides materials for the course "Statistics II: Time Series, P
 -  Datacamp's Learn R (any much more) online. Some courses are free. [Link](https://moodle.hertie-school.org/mod/url/view.php?id=43129)
 -  UCLA Data Analysis Examples with R. [Link](https://moodle.hertie-school.org/mod/url/view.php?id=43130)
 - R for Data Science (Wickham and Grolemund) - free online book on modern statistical analysis with R.
-  [here](https://moodle.hertie-school.org/mod/url/view.php?id=43131).
+  [Link](https://moodle.hertie-school.org/mod/url/view.php?id=43131).
 
 To be continued.
 
