@@ -9,7 +9,7 @@ This repository provides materials for the course "Statistics II: Time Series, P
 
 **FAQ**
 
-1. I'm a Stata, not an R guy, but want to learn R. Where to start? 
+**1. I'm a Stata, not an R guy, but want to learn R. Where to start?**
 
 -  Swirl - Learn R interactively with the swirl package. [Link](https://moodle.hertie-school.org/mod/url/view.php?id=43128)
 -  Datacamp's Learn R (any much more) online. Some courses are free. [Link](https://moodle.hertie-school.org/mod/url/view.php?id=43129)
@@ -17,7 +17,7 @@ This repository provides materials for the course "Statistics II: Time Series, P
 - R for Data Science (Wickham and Grolemund) - free online book on modern statistical analysis with R.
   [Link](https://moodle.hertie-school.org/mod/url/view.php?id=43131).
 
-2. How can I efficiently get the files from the archive on my local drive?
+**2. How can I efficiently get the files from the archive on my local drive?**
 
 - *The quick way*: click on the green "Clone or download" button in the upper-right corner; then select "Download ZIP". The entire archive will be downloaded as a ZIP file. Just unzip it and work with the folder you just downloaded.
 - *The clean and more sustainable way*: Install GitHub Desktop, available for download [here](https://desktop.github.com/). Clone the repository and pull the data whenever new data are available. To get a deeper understanding of Git/GitHub, you should check out these tutorials/slides: [Link 1](https://speakerdeck.com/alicebartlett/git-for-humans), [Link 2](https://guides.github.com/activities/hello-world/).
