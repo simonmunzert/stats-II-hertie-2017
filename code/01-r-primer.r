@@ -152,6 +152,14 @@ library(dplyr)
 # dplyr provides an intuitive grammar of data manipulation
 # - identifies the most important data manipulation tasks 
 # - ...and makes them easy to use from R
+# - important dplyr verbs:
+    # select()    select columns
+    # filter()    filter rows
+    # arrange()   re-order or arrange rows
+    # mutate()    create new columns
+    # summarise() summarise values
+    # group_by()  allows for group operations
+
 
 ### let's try it out with an interesting dataset!
 library(nycflights13)
@@ -211,7 +219,7 @@ summarize(flights_by_origin, dep_delay = mean(dep_delay, na.rm = TRUE))
 browseURL("hhttps://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf")
 
 
- 
+
 
 # **************************
 # EXERCISE -----------------
@@ -222,6 +230,7 @@ browseURL("hhttps://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-ch
 # 2. How many flights started from NYC airports in 2013, by month?
 # 3. Which were the most frequent destinations?
 # 4. Which flights went from JFK to PWM (Portland) in January between midnight and 5am?
-# 5. Which carrier had the biggest mean net delay (department delay minus arrival delay), which the lowest?
+# 5. Which carrier had the biggest mean net delay (departure delay minus arrival delay), which the lowest?
 # 6. Inspect visually how the net delays are distributed!
 # 7. How are distance and net delay related?
+
