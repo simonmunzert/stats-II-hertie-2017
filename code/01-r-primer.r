@@ -143,7 +143,6 @@ model_out <- lm(wage ~ educ + female, data = wage1)
 summary(model_out)
 
 
-
 # ************************************************
 # MANIPULATING DATA FRAMES -----------------------
 
