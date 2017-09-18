@@ -16,10 +16,12 @@ data("wage1")
 
 # inspect relationship
 qplot(educ, wage, data = wage1)
+plot(wage1$educ, wage1$wage)
+cor(wage1$wage, wage1$educ)
 with(wage1, cor(educ, wage))
 
 # run linear model
-wage_model <- glm(wage ~ educ, data = wage1)
+wage_model <- lm(wage ~ educ, data = wage1)
 summary(wage_model)
 coef(wage_model)
 
