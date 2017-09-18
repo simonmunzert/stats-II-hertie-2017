@@ -9,7 +9,8 @@ p_needed <- c("readr", # imports spreadsheet data
               "nycflights13", # dataset on all 336776 flights departing from NYC in 2013
               "wooldridge", # datasets used in Wooldridge
               "car", # functions from "Compaion to Applied Regression"
-              "lmtest" # functions for additional regression diagnostics (including RESET test)
+              "lmtest", # functions for additional regression diagnostics (including RESET test)
+              "broom"
 )
 packages <- rownames(installed.packages())
 p_to_install <- p_needed[!(p_needed %in% packages)]
