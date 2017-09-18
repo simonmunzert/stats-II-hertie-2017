@@ -1,0 +1,61 @@
+---
+title: "Introduction to R - Assignment"
+author: "Simon Munzert"
+date: "18.09.2017"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+source("packages.r")
+```
+
+<br>
+
+#### In-class exercise 
+
+##### 1. How many flights started from all the NYC airports in 2013?
+
+##### 2. How many flights started from NYC airports in 2013, by month?
+
+##### 3. Which were the most frequent destinations?
+
+##### 4. Which flights went from JFK to PWM (Portland) in January between midnight and 5am?
+
+##### 5. Which carrier had the biggest mean net delay (departure delay minus arrival delay), which the lowest?
+
+##### 6. Inspect visually how the net delays are distributed!
+
+##### 7. How are distance and net delay related?
+
+
+
+<br>
+
+#### Working with vectors 
+
+
+##### 1. Create a vector x with elements [0,4,8,12,16,20].
+
+##### 2. Create a vector y with elements [3,3,3,4,4,4,4,5,5,5,5,5].
+
+##### 3. Combine the first five elements of x with elements 2 to 12 of vector y to create a new vector z.
+
+##### 4. What's the sum of all numbers between 1 and 100? Use the functions you learned in the vectors script to compute it!
+
+##### 5. What's the sum of all odd numbers between 1 and 100 squared?
+
+
+
+<br>
+
+#### Working with data frames 
+
+##### 1. Inspect the "babynames" package! What data does it contain? Focus on the babynames data frame in the following.
+
+##### 2. Which time period does the data frame cover?
+
+##### 3. What has been the most frequent name in the US since 1880? (hint: you might need the group_by() as well as the sum() function)
+
+##### 4. Use graphical means to determine since which year the name "Kim" became more popular as a female than a male name! (hint: grouping by two variables is helpful here! For the plot, use "year" on the x axis and "total count" on the y axis! Furthermore, this Stackoverflow post helps you understand how to plot two lines in one chart: https://stackoverflow.com/questions/2564258/plot-two-graphs-in-same-plot-in-r)
+
