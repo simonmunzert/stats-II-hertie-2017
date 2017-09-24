@@ -1,0 +1,43 @@
+---
+title: "Interactions - Assignment"
+author: "Simon Munzert"
+date: "21.09.2017"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+source("packages.r")
+```
+
+<br>
+
+### Assignment
+
+#### 1. Think through the equation again that Braumoeller (2004) uses to illustrate how scaling of a mediating variable matters for main effects in the regression model (Just think through it, you don't have to write anything up). Then, replicate the results from the motivating setup Braumoeller (2004, IO 58) uses to make his point and that leads to Table 1. Use the parameters from footnote 1! 
+
+```{r}
+```
+
+<br>
+
+#### 2. Consider the "wage2" data set from the wooldridge package! The outcome of interest is monthly earnings. Make yourself familiar with the data set and, based on the observational data, come up with ad hoc hypotheses that predict wage. Also, try to develop a hypothesis where one variable (continuous) mediates the effect of another. Estimate a model that predicts wage using a set of variables, including the interaction variables. Visualize the interaction effect appropriately and interpret your findings!
+
+<br>
+
+#### 3. What determines support for European integration? For the following tasks, please consider the data set "eu-support.dta", which is a small dataset on individual support for European integration (variable eusupp) in Denmark, Spain and the UK. Your preliminary theorizing suggests that EU support is determined by political ideology and by the country-specific understanding of EU integration.
+
+##### a) Load your data. Next, recode the variable "nation" as follows: 7 = Denmark, 9 = UK, 11 = Spain using the recode() function from the car package. Finally, make the variable a character variable using as.character().
+
+##### b) Build a simple model that predicts EU support with left-right ideology and the country of residence as well as their interactions. Also, control for gender (2 is female), age, and education (just take it as a numeric variable). Display the results in a regression table!
+
+##### c) Try to interpret the effect of ideology across the three countries. What are the partial slopes (the effect of ideology on EU support) in each country?
+
+##### d) (Tricky, don't despair if you struggle here): Test whether these slopes are statistically significantly different from 0. Hint: applying the vcov() command on your model gives you the variance-covariance matrix!
+
+##### e) (Also tricky; don't put too much effort into that one): Compute 95% confidence intervals for the effects and visualize the effects (along with the intervals) in a plot!
+
+
+<br>
+
+#### 4. (Optional): check out how the "margins" package works! A good start might be https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html". Try to understand how this package is not only useful for visualizing conditional effects, but to calculate marginal effects in general and how this helps you communicate the implications of your models better!
