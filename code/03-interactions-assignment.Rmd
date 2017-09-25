@@ -14,6 +14,10 @@ source("packages.r")
 
 ### Assignment
 
+#### 0. Returning to the assignment from last time on a positive bias of a post-treatment variable on your effect of interest, try to come up with a real-world example to illustrate this mechanism!
+
+<br>
+
 #### 1. Think through the equation again that Braumoeller (2004) uses to illustrate how scaling of a mediating variable matters for main effects in the regression model (Just think through it, you don't have to write anything up). Then, replicate the results from the motivating setup Braumoeller (2004, IO 58) uses to make his point and that leads to Table 1. Use the parameters from footnote 1! 
 
 ```{r}
