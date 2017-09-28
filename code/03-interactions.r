@@ -45,7 +45,7 @@ wage1$educ_cat <- car::recode(wage1$educ, "0:9='low' ;
 
 # run model
 summary(wage_model <- lm(wage ~ educ_cat*female, data = wage1))
-
+summary(wage_model <- lm(wage ~ educ_cat, data = wage1))
 
 
 # ************************************************

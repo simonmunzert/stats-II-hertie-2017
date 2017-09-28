@@ -19,6 +19,7 @@ source("packages.r")
 ##### a) Use the data to estimate the unconditional effect of cigarette consumption on child birth weight! There are two variables in the dataset that measure cigarette consumption. How are the results affected by the choice of variables here? Why? What happens if you include both variables in one model? Why?
 
 ```{r}
+
 ```
 
 ##### b) The infant birth weight is measured in ounces. Create a new variable bwghtkg that measures birth weight in kilograms. How does this affect the model estimates?
