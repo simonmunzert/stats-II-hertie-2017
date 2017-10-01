@@ -54,13 +54,19 @@ summary(wage_model <- lm(wage ~ educ_cat, data = wage1))
 # simulation setup
 set.seed(123)
 N <- 500
-x <- runif(N, 0, 3)
+x <- runif(N, 0, 1) * 3
+
+z <- runif(N, 0, 1)
+z <- ifelse(z >= .5, 1, 0)
+z[z >= .5] <- 1
+z[z  < .5] <- 0
+
 z <- rbinom(N, 1, .5)
 b0 <- 2
 b1 <- 0
 b2 <- 2
 b3 <- 2
-e <- rnorm(N, 0, .5)
+e <- rnorm(N, 0, sqrt(.5))
 y <- b0 + b1*x + b2*z + b3*x*z + e
 dat <- as.data.frame(y = y, x = x, z = z)
 # plot points

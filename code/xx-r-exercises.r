@@ -19,10 +19,10 @@ library(swirl)
 # launch Swirl
 swirl()
 
-# install a course, for instance
+simpleCondition()# install a course, for instance
 install_course("R Programming")
 #install_course("Regression Models")
-#install_course("Getting and Cleaning Data")
+install_course("Getting and Cleaning Data")
 
 # check out which courses are available
 browseURL("https://github.com/swirldev/swirl_courses")
@@ -47,6 +47,12 @@ browseURL("https://github.com/swirldev/swirl_courses")
 # c) Compute the sum of all values.
 
 x <- c(34, 56, 55, 87, NA, 4, 77, NA, 21, NA, 39)
+x[!is.na(x)]
+mean(x, na.rm = TRUE)
+median(x, na.rm = TRUE)
+var(x, na.rm = TRUE)
+sd(x, na.rm = TRUE)
+sum(x, na.rm = TRUE)
 
 
 ## Exercise 2
@@ -57,6 +63,15 @@ x <- c(34, 56, 55, 87, NA, 4, 77, NA, 21, NA, 39)
 # d) Extract the second and the last observation from the vector.
 # e) Sort your friends by their names.
 # f) Reverse the direction of the above sort.
+
+friends <- c("Homer", "Marge", "Bart", "Lisa", "Maggie")
+length(friends)
+friends[1:2]
+friends[c(1, 5)]
+friends[c(1, length(friends))]
+sort(friends)
+rev(sort(friends))
+sort(friends, decreasing = TRUE)
 
 
 ## Exercise 3
@@ -85,6 +100,13 @@ gender <- c("M", "M", "M", "F", "F", "F")
 # c) Identify the district(s) in which the SPD improved its share of the vote!
 # d) Generate a new variable that indicates the district winning party (i.e. the party with the most first votes!)
 # e) Build a bar chart that visualizes the vote shares for all parties! The following link might help: http://www.statmethods.net/graphs/bar.html
+
+dat <- read_tsv("../data/btw17_kerg.csv")
+dat[is.na(dat)] <- 0
+dat <- mutate(dat, cdsu1 = cdu1 + csu1,
+                   cdsu1_last = cdu1_last + csu1_last,
+              )
+
 
 
 ## Exercise 6

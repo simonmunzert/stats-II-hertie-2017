@@ -1,0 +1,130 @@
+---
+title: "Time Series - Assignment"
+author: "Simon Munzert"
+date: "30.09.2017"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+source("packages.r")
+```
+
+<br>
+
+### Assignment 04: Time Series
+
+<br>
+
+##### 1. Traffic accidents in California 
+
+The dataset `traffic2` from the `wooldridge` package contains 108 monthly observations on automobile accidents, traffic laws, and some other variables for California from January 1981 through December 1989. Use this dataset to tackle the following tasks.
+
+<br>
+(a) Generate an `xts` time series object from the dataset and plot the time series of total accidents.
+
+```{r}
+# add code here!
+```
+
+
+
+<br>
+(b) During what month and year did California's seat belt law take effect? And when did the highway speed limit increase to 65 miles per hour? Try to indicate these dates in the time series plot using red vertical lines! _Hint:_ Use the `addEventLines()` to add the lines!
+
+```{r}
+# add code here!
+```
+
+
+<br>
+(c) Regress the variable `totacc` on a linear time trend and 11 monthly dummy variables, using January as the base month. Interpret the coefficient estimate on the time trend. Would you say there is seasonality in total accidents?
+
+```{r}
+# add code here!
+```
+
+<span style="color:blue">
+Add comment like this! (just copy the <span>...</span> lines for future comments in the Rmd file.)
+</span>
+
+<br>
+(d) Use STL to decompose the `injacc` as well as the `fatacc` time series and plot the results. What do the graphs tell you about the seasonality and trends on these two variables?
+
+```{r}
+# add code here!
+```
+
+<br>
+(e) Add to the regression from (c) the variables `wkends`, `unem`, `spdlaw`, and `beltlaw`. Discuss the coefficient on the unemployment variable. Does its sign and magnitude make sense to you?
+
+```{r}
+# add code here!
+```
+
+<br>
+(f) The variable `prcfat` is the percentage of accidents resulting in at least one fatality. Use STL to decompose the corresponding time series; then run the regression from (e) again but now use `prcfat` as the dependent variable. Interpret the estimated effects, in particular those of the policy variables. 
+
+
+```{r}
+# add code here!
+```
+
+
+<br>
+
+##### 2. Productivity and unemployment in the US
+
+The dataset `productivity.dta` in the `data` folder contains data on unemployment (measured in 1000 persons) and labor productivity (i.e, output per hour) in the US from 1972 to 2014.
+
+<br>
+(a) Load the data and get an overview of the variables. Use the function `var_label` from the `labelled` package to figure out what's behind the individual variables. Furthermore, generate time-series plots of unemployment and productivity and a scatterplot that illustrates the relationship between both variables (with `unemployment` on the y axis)! For the latter, use the `text()` function to assign year labels to the dots in the plot!
+
+
+```{r}
+# add code here!
+```
+
+<br>
+(b) Test the theory that productivity gains lead to higher unemployment using simple OLS regression. Show your results and interpret them.
+  
+```{r}
+# add code here!
+```
+
+<br>
+(c) Test the variables from the previous regression for stationarity. Show your code, results and interpret them briefly. Should you trust your results from the first regression?
+  
+```{r}
+# add code here!
+```
+
+<br>
+(d) Besides the issue of stationarity, you remember there may also be a problem with dependence. You have a good reason to believe that previous unemployment levels will have an effect on current levels of unemployment (you might be suspecting an AR(1) process). Carry out a statistical test for an AR(1) process in unemployment. Show your work and interpret the result.
+
+```{r}
+# add code here!
+```
+
+<br>
+(e) Plot the autocorrelation of unemployment. What does it show you?
+
+```{r}
+# add code here!
+```
+
+<br>
+(f) To address the issues of stationarity and autocorrelation, try first-differencing for both variables (there's a simple function in `R` - google for it), and then inspect the autocorrelation of both variables again. What do you see?
+
+```{r}
+# add code here!
+```
+
+<br>
+(g) Now, run a regression of the differenced time series and interpret the results. Finally, come up with additional hypotheses that relate to the other variables in the dataset, and test these!
+
+```{r}
+# add code here!
+```
+
+

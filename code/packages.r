@@ -2,6 +2,7 @@
 # install packages from CRAN
 p_needed <- c("readr", # imports spreadsheet data
               "haven", # imports SPSS, Stata and SAS files
+              "labelled", # helpers to work with variable labels
               "dplyr",  # provides neat functions for data frame manipulation,
               "ggplot2", # advanced graphics suite
               "stargazer", # nice formatting of regression table output
@@ -9,8 +10,14 @@ p_needed <- c("readr", # imports spreadsheet data
               "nycflights13", # dataset on all 336776 flights departing from NYC in 2013
               "wooldridge", # datasets used in Wooldridge
               "car", # functions from "Compaion to Applied Regression"
-              "lmtest", # functions for additional regression diagnostics (including RESET test)
-              "broom"
+              "lmtest", # functions for additional regression diagnostics (including RESET test),
+              "broom", # tidying model output
+              "interplot", # plot effects of interaction terms
+              "margins", # calculate and visualize marginal effects
+              "interflex", # interaction diagnostics and flexible estimation
+              "xts", # working with time-series data
+              "tseries", # functions for time series analysis
+              "lubridate" # working with dates and times
 )
 packages <- rownames(installed.packages())
 p_to_install <- p_needed[!(p_needed %in% packages)]
