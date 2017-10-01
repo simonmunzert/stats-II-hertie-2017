@@ -55,7 +55,6 @@ dat <- fertil3
 plot(dat$gfr)
 
 # create xts time series object
-
 dat_ts <- ts(dat, frequency = 1, start = 1913) # creat time-series object: provide time of the first observation and frequency 
 dat_xts <- as.xts(dat_ts)
 
@@ -102,6 +101,7 @@ acf(nyse$price, na.action = na.pass, lag.max = 20)
 
 # assess autocorrelation in disturbances using the Durbin-Watson test for autocorrelation
 model <- lm(price ~ lag(price), data = nyse)
+summary(model)
 dwtest(model) # be careful; in LDV models, the DW test statistic uses to underestimate autocorrelation
 
 
@@ -110,7 +110,7 @@ dwtest(model) # be careful; in LDV models, the DW test statistic uses to underes
 # Finite distributed lag (FDL) models ------------
 
 # scatterplot
-plot(dat$gfr, dat$pe)
+plot(dat$pe, dat$gfr)
 
 # parallel time series
 par(mfrow = c(2, 1))
@@ -122,7 +122,6 @@ model_out <- lm(gfr ~ pe, data = dat) # static model; only impact propensity ass
 summary(model_out)
 model_out <- lm(gfr ~ pe + lag(pe, 1) + lag(pe, 2), data = dat) # assess long-run propensity with two lags
 summary(model_out)
-
 
 
 
@@ -140,7 +139,7 @@ cor(dat$gfr, lag(dat$gfr, 11), use = "pairwise.complete")
 cor(dat$gfr, lag(dat$gfr, 12), use = "pairwise.complete")
 
 # build simple LDV model
-lm(gfr ~ lag(gfr, 1) + lag(gfr, 2), data = dat)
+summary(lm(gfr ~ lag(gfr, 1) + lag(gfr, 2), data = dat))
 
 
 
