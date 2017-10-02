@@ -83,8 +83,8 @@ plot(nyse$return, type = "l")
 summary(lm(return ~ lag(return), data = nyse))
 
 # Augmented Dickey-Fuller test
-adf.test(nyse$return[-1])
 plot(nyse$t, nyse$return, type = "l")
+adf.test(nyse$return[-1])
 
 # How does the Dickey-Fuller test work?
   # tests the predictive power of an autoregressive process on the integrated time series
