@@ -4,7 +4,9 @@ p_needed <- c("readr", # imports spreadsheet data
               "haven", # imports SPSS, Stata and SAS files
               "labelled", # helpers to work with variable labels
               "dplyr",  # provides neat functions for data frame manipulation,
+              "tidyr", # suite for tidying data
               "ggplot2", # advanced graphics suite
+              "gridExtra", # more functionality for ggplot2 plot
               "stargazer", # nice formatting of regression table output
               "babynames", # US baby names provided by the SSA
               "nycflights13", # dataset on all 336776 flights departing from NYC in 2013

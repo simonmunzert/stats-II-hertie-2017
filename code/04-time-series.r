@@ -97,7 +97,7 @@ adf.test(y)
 
 # assess autocorrelation
 acf(nyse$return, na.action = na.pass)
-acf(nyse$price, na.action = na.pass, lag.max = 20)
+acf(nyse$price, na.action = na.pass, lag.max = 200)
 
 # assess autocorrelation in disturbances using the Durbin-Watson test for autocorrelation
 model <- lm(price ~ lag(price), data = nyse)
