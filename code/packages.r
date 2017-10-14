@@ -19,7 +19,9 @@ p_needed <- c("readr", # imports spreadsheet data
               "interflex", # interaction diagnostics and flexible estimation
               "xts", # working with time-series data
               "tseries", # functions for time series analysis
-              "lubridate" # working with dates and times
+              "lubridate", # working with dates and times
+              "plm", # panel data econometrics
+              "pcse" # panel-corrected standard errors à la Beck and Katz (1995)
 )
 packages <- rownames(installed.packages())
 p_to_install <- p_needed[!(p_needed %in% packages)]
