@@ -11,13 +11,14 @@ source("functions.r")
 browseURL("https://cran.r-project.org/web/views/Econometrics.html")
 
 
+
 # ************************************************
 # Example: Comparative Political Dataset ---------
 
 dat <- read_dta("../data/CPDS-1960-2015.dta")
 dat <- filter(dat, emu == 1) # only EMU countries
 
-hist(dat$gov_left2) 
+hist(dat$gov_left2)
 hist(dat$socexp_t_pmp)
 
 # plot small multiples of share of left parties and social expenditures
@@ -54,7 +55,6 @@ dat_long <- reshape(dat_wide, idvar = c("country", "iso"), varying = 3:104, dire
 data("fertil1")
 ?fertil1
 
-fertil1 <- mutate(fertil1, age2 = age^2)
 summary(lm(kids ~ age + educ + black + age + I(age^2) + east + northcen + west + farm + othrural + town + smcity + y74 + y76 + y78 + y80 + y82 + y84, data = fertil1))
 
 # dealing with multiple dummies across many models can be cumbersome - here's an alternative way to construct your formula:
@@ -222,30 +222,3 @@ df <- data.frame(
 )
 df
 unite(df, century, year, col = "year", sep = "")
-
-# example: gather() + separate() + spread()
-# demo("dadmom")
-
-dadmom <- read_dta("http://www.ats.ucla.edu/stat/stata/modules/dadmomw.dta")
-dadmom # 3+1 variables in 5 columns
-
-dadmom %>% gather(key, value, named:incm)
-
-dadmom %>% gather(key, value, named:incm) %>%
-  separate(key, c("variable", "type"), -2) 
-
-dadmom %>% gather(key, value, named:incm) %>%
-  separate(key, c("variable", "type"), -2) %>%
-  spread(variable, value, convert = TRUE)
-
-# handling missing values
-df <- data.frame(y = LETTERS[1:6], x = c(1, NA, NA, 3, NA, 4))
-df
-drop_na(df)
-fill(df, x, .direction = "up")
-replace_na(df, list(x = 2))
-fill(df)
-
-
-
-

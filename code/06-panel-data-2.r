@@ -19,6 +19,7 @@ dat <- dplyr::select(dat, year, country, iso, gov_left2, socexp_t_pmp, instcons,
 head(dat)
 
 
+
 # ************************************************
 # Panel data econometrics with R: the plm package
 
@@ -61,22 +62,23 @@ browseURL("https://cran.r-project.org/web/packages/plm/vignettes/plm.pdf")
 # Implementing the Fixed-Effects estimator -------
 
 # pooled OLS
-summary(model_pooled <- lm(socexp_t_pmp ~ gov_left2*instcons + gov_left2*unemp, data = dat))
+summary(model_pooled <- lm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp, data = dat))
 hist(dat$gov_left2)
 interplot(model_pooled, var1 = "gov_left2", var2 = "instcons")
 interplot(model_pooled, var1 = "gov_left2", var2 = "unemp")
 
 # pooled OLS with plm
-summary(model_pooled_plm <- plm(socexp_t_pmp ~ gov_left2*instcons + gov_left2*unemp, data = dat, index = c("iso", "year"), model = "pooling"))
+summary(model_pooled_plm <- plm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp, data = dat, index = c("iso", "year"), model = "pooling"))
 
 # fixed-effects estimator, manually
-summary(model_fe <- lm(socexp_t_pmp ~ gov_left2*instcons + gov_left2*unemp + iso, data = dat))
+summary(model_fe <- lm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp + iso, data = dat))
 
 # fixed-effects estimator with plm
-summary(model_fe_plm <- plm(socexp_t_pmp ~ gov_left2*instcons + gov_left2*unemp, data = dat, index = c("iso", "year"), model = "within"))
+summary(model_fe_plm <- plm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp, data = dat, index = c("iso", "year"), model = "within"))
 
 # F test for fixed effects
 pFtest(model_fe_plm, model_pooled_plm) # F test FE vs polling model
+
 
 
 
@@ -85,7 +87,7 @@ pFtest(model_fe_plm, model_pooled_plm) # F test FE vs polling model
 
 # visualize fixed effects
 fixed_effects <- c(coef(model_fe)[1], 
-                   coef(model_fe)[1] + coef(model_fe)[5:length(coef(model_fe))])
+                   coef(model_fe)[1] + coef(model_fe)[5:(length(coef(model_fe))-2)])
 fe_dat <- data.frame(iso = unique(model_fe$model$iso),
                      fixed_effect = fixed_effects)
 
@@ -102,6 +104,7 @@ dat_sum <- group_by(dat, iso) %>% summarize(n_obs = n(),
 # merge model fixed effects with raw means: don't confuse fixed effects with "normal levels" or something - they simply account for unobserved constant effects, i.e. the portion of y in i that is not explained by the other, time-varying covariates and that is unit-constant across time
 fe_dat <- merge(fe_dat, dat_sum, by = "iso", all.x = TRUE)
 plot(fe_dat$fixed_effect, fe_dat$mean_socexp)
+text(fe_dat$fixed_effect, fe_dat$mean_socexp, fe_dat$iso)
 
 
 
@@ -130,6 +133,25 @@ reg_dem = lm(y_dem ~ -1 + x_dem) # note that we do not estimate the intercept be
 summary(reg_dem) # note that the standard error is wrong. We would need to account for that we are losing degrees of freedom by taking out the fixed effects.
 
 
+# ******************************************************
+# What about time-fixed effects?
+
+  # would pick up variation in the outcome that occurs over time and is not attributed to other explanatory variables
+  # --> capture the influence of aggregate (time-series) trends
+  # could help you deal with heteroskedasticity 
+
+# fixed-effects estimator with plm
+summary(model_fe_time <- plm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp + as.factor(year), data = dat, index = c("iso", "year"), model = "within"))
+
+# test for the need of time-fixed effects
+pFtest(model_fe_time, model_fe_plm)
+
+# Breusch-Pagan test for heteroskedasticity across time
+plmtest(model_fe_plm, effect = c("time"), type = ("bp"))
+
+
+
+
 
 # ************************************************
 # Implementing the Random-Effects estimator ------
@@ -146,7 +168,7 @@ phtest(model_fe_plm, model_re_plm)
 
 # ************************************************
 # Using Panel-Corrected Standard Errors (PCSEs) --
-# 
+
 
 # Beck and Katz 1995: 
   # TSCS data, such as country panels, often tackled with models that do not account properly for complex error structures (autocorrelation, heteroskedasticity - it's a mess!)

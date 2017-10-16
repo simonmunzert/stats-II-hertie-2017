@@ -89,3 +89,9 @@ Use the data in `wagepan` from the `wooldridge` package for this exercise.
 ```
 
 
+<br>
+
+##### 4. Learning more R
+
+Work through the script `01-r-primer-split-apply-combine.r` to learn more about the split-apply-combine workflow in R!
+
