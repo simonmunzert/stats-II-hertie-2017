@@ -1,6 +1,6 @@
 # ************************************************
 ### simon munzert
-### panel data I
+### panel data II
 # ************************************************
 
 source("packages.r")
@@ -62,22 +62,22 @@ browseURL("https://cran.r-project.org/web/packages/plm/vignettes/plm.pdf")
 # Implementing the Fixed-Effects estimator -------
 
 # pooled OLS
-summary(model_pooled <- lm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp, data = dat))
+summary(model_pooled <- lm(socexp_t_pmp ~ gov_left2 + instcons  + unemp, data = dat))
 hist(dat$gov_left2)
-interplot(model_pooled, var1 = "gov_left2", var2 = "instcons")
-interplot(model_pooled, var1 = "gov_left2", var2 = "unemp")
+# interplot(model_pooled, var1 = "gov_left2", var2 = "instcons")
+# interplot(model_pooled, var1 = "gov_left2", var2 = "unemp")
 
 # pooled OLS with plm
-summary(model_pooled_plm <- plm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp, data = dat, index = c("iso", "year"), model = "pooling"))
+summary(model_pooled_plm <- plm(socexp_t_pmp ~ gov_left2 + instcons  + unemp, data = dat, index = c("iso", "year"), model = "pooling"))
 
 # fixed-effects estimator, manually
-summary(model_fe <- lm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp + iso, data = dat))
+summary(model_fe <- lm(socexp_t_pmp ~ gov_left2 + instcons  + unemp + iso, data = dat))
 
 # fixed-effects estimator with plm
-summary(model_fe_plm <- plm(socexp_t_pmp ~ gov_left2 + instcons + gov_left2 + unemp, data = dat, index = c("iso", "year"), model = "within"))
+summary(model_fe_plm <- plm(socexp_t_pmp ~ gov_left2 + instcons + unemp, data = dat, index = c("iso", "year"), model = "within"))
 
 # F test for fixed effects
-pFtest(model_fe_plm, model_pooled_plm) # F test FE vs polling model
+pFtest(model_fe_plm, model_pooled_plm) # F test FE vs pooling model
 
 
 
@@ -87,7 +87,7 @@ pFtest(model_fe_plm, model_pooled_plm) # F test FE vs polling model
 
 # visualize fixed effects
 fixed_effects <- c(coef(model_fe)[1], 
-                   coef(model_fe)[1] + coef(model_fe)[5:(length(coef(model_fe))-2)])
+                   coef(model_fe)[1] + coef(model_fe)[5:(length(coef(model_fe)))])
 fe_dat <- data.frame(iso = unique(model_fe$model$iso),
                      fixed_effect = fixed_effects)
 

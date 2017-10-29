@@ -1,0 +1,75 @@
+---
+title: "MLE - Assignment"
+author: "Simon Munzert"
+date: "27.10.2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+source("packages.r")
+```
+
+<br>
+
+### Assignment 07: Maximum Likelihood Estimation
+
+<br>
+
+##### 1. A coin game
+
+I propose a game to play with you. We will flip my coin, which my great grandfather gave to me. If it returns a head, you will pay me 1 Euro. If it returns a tail, I will pay you 1.2 Euro. The dataset `flip.dta` contains data on 300 flips of my great grandfather's coin. The variable `flip` is coded 0 if the result of the flip is a head, 1 if it is a tail.
+
+<br>
+(a) What would you want to know before you accept this game?
+
+<span style="color:blue">
+Add your answer here.
+</span>
+
+<br>
+(b) Is there a quick way to check this (i.e. without inference)? Perform it in R.
+
+<span style="color:blue">
+Add your answer here.
+</span>
+
+
+<br>
+(c) Now suggest a probability distribution that can be used to represent the outcome of the coin flips. Based on your choice, estimate the parameter of interest using MLE and a manually defined likelihood function! Also report uncertainty by providing a 95% confidence interval around the estimate!
+
+<span style="color:blue">
+Add your answer here.
+</span>
+
+
+<br>
+(d) Under what circumstances would you be willing to play a game with this coin -- what would I have to offer to pay you when the coin returns tails? (probably no R needed to answer the question)
+
+<span style="color:blue">
+Add your answer here.
+</span>
+
+
+<br>
+
+##### 2. The Poisson distribution
+
+<br>
+(a) Inform yourself about the Poisson distribution. What does it describe? How many parameters does it have?
+
+<span style="color:blue">
+Add your answer here.
+</span>
+
+<br>
+(b) Now draw 1000 random values from the Poisson distribution and store it in vector `dat_pois`. You are free to choose the value of the distribution's parameter. Then, try to plot the data appropriately.
+
+<br>
+(c) What are the mean and variance of your generated sample? Are you surprised?
+
+<span style="color:blue">
+Add your answer here.
+</span>
+
+<br>
+(d) Now define a Poisson likelihood function and apply it to arrive at a ML estimate of the parameter.
