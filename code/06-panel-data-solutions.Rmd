@@ -1,0 +1,108 @@
+---
+title: "Panel Data - Assignment"
+author: "Simon Munzert"
+date: "11.10.2017"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+source("packages.r")
+```
+
+<br>
+
+### Assignment 06: Panel Data
+
+<br>
+
+##### 1. Housing prices in an unfavorable environment
+
+ Do houses close to a garbage incinerator decrease in value? The dataset `kielmc` from the `wooldridge` package contains information about housing from North Andover, Mass. It is pooled cross-section data, with information from 1978 and 1981. An incinerator was built between these two years and we thus have a quasi-experimental situation with measurements before (1978) and after (1981) treatment. Your main hypothesis is that houses close to the incinerator lost value after the incinerator was built.
+
+<br>
+(a) Estimate separate models for the time before and after the building of the incinerator (i.e., a two-step DID) to find out whether it affect the price (in 1978 dollars) of houses near it (`nearinc`).
+
+```{r}
+data("kielmc")
+summary(model_before <- lm(rprice ~ nearinc, data = filter(kielmc, year == 1978)))
+summary(model_after <- lm(rprice ~ nearinc, data = filter(kielmc, year == 1981)))
+# the implied net effect of incinerator installment
+coef(model_after)[2] - coef(model_before)[2]
+```
+
+<br>
+(b) Now use a single-equation interaction model to assess the same effect. Do you observe any difference? What, in your opinion, is the advantage of estimating a single-equation model towards estimating two separate models?
+
+```{r}
+summary(model_after <- lm(rprice ~ nearinc*y81, data = kielmc))
+```
+
+<br>
+(c) Now add controls to the model estimated in (b) for house characteristics that could also explain house prices! What happens to the effect of interest? Why?
+
+```{r}
+summary(model_after <- lm(rprice ~ nearinc*y81 + age + intst + land + area + rooms + baths, data = kielmc))
+```
+
+
+
+<br>
+
+##### 2. Student-athletes performance
+
+The dataset `gpa3` from the `wooldridge` package is for student-athletes from a large university for fall and spring semesters. Because you have two terms (i.e., semesters) of data for each student, an unobserved effect model is appropriate. The primary question is this: Do athletes perform more poorly in school during the semester that their sport is in season? Remember, you have data on 366 students, identiﬁed by the variable `id`, over two terms (variable `term`).
+
+<br>
+(a) Perform some descriptive operations to learn more about the basics of the data, such as how many students there are in the dataset, how the dependent variable (see below) is distributed, etc.
+
+```{r}
+data("gpa3")
+names(gpa3)
+length(unique(gpa3$id))
+hist(gpa3$trmgpa)
+```
+
+<br>
+(b) Use pooled OLS to estimate a model with term GPA (`trmgpa`) as the dependent variable. The explanatory variables are `sat`, `female`, and `season`. What about the substantive size of the effects? Is season statistically signiﬁcant?
+  
+```{r}
+summary(lm(trmgpa ~ sat + female + season, data = gpa3))
+```
+
+<br>
+(c) Now run a model with differenced variables as well as a fixed-effects model. What do you observe?
+  
+```{r}
+summary(plm(trmgpa ~ sat + female + season, data = gpa3, model = "fd", index = "id"))
+summary(plm(trmgpa ~ sat + female + season, data = gpa3, model = "within", index = "id"))
+```
+
+
+##### 3. Wages... again
+
+Use the data in `wagepan` from the `wooldridge` package for this exercise.
+
+<br>
+(a) Estimate a model that explains log(wage) by education, race and labor market experience using pooled OLS and briefly interpret the estimates and standard errors!
+
+```{r}
+data(wagepan)
+summary(plm(lwage ~ educ + black + hisp + exper, data = wagepan, index = c("nr", "year"), model = "pooling"))
+```
+
+<br>
+(b) Now estimate the model by fixed and random effects. How do the estimates compare?
+
+```{r}
+summary(model_fe <- plm(lwage ~ educ + black + hisp + exper, data = wagepan, index = c("nr", "year"), model = "within"))
+summary(model_re <- plm(lwage ~ educ + black + hisp + exper, data = wagepan, index = c("nr", "year"), model = "random"))
+```
+
+(c) Does the Hausman test suggest to use the RE model or rather to stay with the FE model? Try to adapt the model in a way that, according to the Hausman test, allows you to use an RE model!
+
+```{r}
+phtest(model_fe, model_re)
+```
+
+
