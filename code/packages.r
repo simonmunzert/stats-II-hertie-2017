@@ -21,7 +21,11 @@ p_needed <- c("readr", # imports spreadsheet data
               "tseries", # functions for time series analysis
               "lubridate", # working with dates and times
               "plm", # panel data econometrics
-              "pcse" # panel-corrected standard errors à la Beck and Katz (1995)
+              "pcse", # panel-corrected standard errors à la Beck and Katz (1995)
+              "readxl", # import Excel data
+              "ggthemes",
+              "Zelig",
+              "ISLR"
 )
 packages <- rownames(installed.packages())
 p_to_install <- p_needed[!(p_needed %in% packages)]
