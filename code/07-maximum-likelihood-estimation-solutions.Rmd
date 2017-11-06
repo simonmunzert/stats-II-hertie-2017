@@ -1,0 +1,118 @@
+---
+title: "MLE - Assignment"
+author: "Simon Munzert"
+date: "27.10.2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+source("packages.r")
+```
+
+<br>
+
+### Assignment 07: Maximum Likelihood Estimation
+
+<br>
+
+##### 1. A coin game
+
+I propose a game to play with you. We will flip my coin, which my great grandfather gave to me. If it returns a head, you will pay me 1 Euro. If it returns a tail, I will pay you 1.2 Euro. The dataset `flip.dta` contains data on 300 flips of my great grandfather's coin. The variable `flip` is coded 0 if the result of the flip is a head, 1 if it is a tail.
+
+```{r}
+dat <- read_dta('../data/flip.dta')
+table(dat$flip)
+```
+
+<br>
+(a) What would you want to know before you accept this game?
+
+<span style="color:blue">
+You would want to know whether it is a fair coin, and what the $\\p$ parameter of this coin is.
+</span>
+
+<br>
+(b) Is there a quick way to check this (i.e. without inference)? Perform it in R.
+
+<span style="color:blue">
+The fast way to check this is to simply get the mean of the variable flip. This mean will give you the ratio of 'tails' that the coin returns, which is the \pi parameter.
+</span>
+
+```{r}
+mean(dat$flip)
+```
+
+<span style="color:blue">
+Clearly, the coin is unfair with an estimated $\\p = .32$.
+</span>
+
+<br>
+(c) Now suggest a probability distribution that can be used to represent the outcome of the coin flips. Based on your choice, estimate the parameter of interest using MLE and a manually defined likelihood function! Also report uncertainty by providing a 95% confidence interval around the estimate!
+
+<span style="color:blue">
+The binomial distribution makes sense here.
+</span>
+
+```{r}
+# define likelihood function
+binom_loglik <- function(x, p) { 
+  llik <- sum(dbinom(x, size = 1, prob = p, log = TRUE))
+  return(-llik) 
+}
+# optimize likelihood function
+res <- optim(par = .5, fn = binom_loglik, x = dat$flip, method = 'Brent', 
+      lower = 0, upper = 1, hessian = TRUE)
+res$par
+# derive uncertainty estimate from Hessian
+inv_hess <- solve(res$hessian)
+sigma <- sqrt(diag(inv_hess)) 
+upper <- res$par + 1.96 * sigma
+lower <- res$par - 1.96 * sigma
+params <- c(res$par, lower, upper)
+names(params) <- c("ML estimate of p", "95% CI (low)", "95% CI (high)")
+params
+```
+
+<br>
+(d) Under what circumstances would you be willing to play a game with this coin -- what would I have to offer to pay you when the coin returns tails? (probably no R needed to answer the question)
+
+<span style="color:blue">
+You should accept this game iff your benefits outweigh your costs. Your utility is a function of your benefits times their probability minus your costs times their probability: U = 1.2 &ast; .32 - 1 &ast; .68 = -.296. You should be willing to play only if I offered to pay you more than 2 Euro when the coin produces a tail since U = 2(.33) - 1(.66) = 0. To arrive at this result, solve the following inequality for R: 0 > R(.33) - 1(.66). 
+</span>
+
+
+<br>
+
+##### 2. The Poisson distribution
+
+<br>
+(a) Inform yourself about the Poisson distribution. What does it describe? How many parameters does it have?
+
+<br>
+(b) Now draw 1000 random values from the Poisson distribution and store it in vector `dat_pois`. You are free to choose the value of the distribution's parameter. Then, try to plot the data appropriately.
+
+```{r}
+dat_pois <- rpois(1000, 3)
+plot(table(dat_pois))
+``` 
+
+<br>
+(c) What are the mean and variance of your generated sample? Are you surprised?
+
+```{r}
+mean(dat_pois)
+sd(dat_pois)^2
+``` 
+
+<br>
+(d) Now define a Poisson likelihood function and apply it to arrive at a ML estimate of the parameter.
+
+```{r}
+# define Poisson likelihood function using dpois()
+poisson_lik  <- function(mu, x) {
+  logl <- sum(dpois(x, lambda = mu, log = TRUE), na.rm = TRUE)
+  return(-logl)
+}
+# optimize
+optim(1, poisson_lik, x = dat_pois, method = "BFGS")
+``` 
