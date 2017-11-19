@@ -25,7 +25,8 @@ p_needed <- c("readr", # imports spreadsheet data
               "readxl", # import Excel data
               "ggthemes",
               "Zelig",
-              "ISLR"
+              "ISLR",
+              "janitor"
 )
 packages <- rownames(installed.packages())
 p_to_install <- p_needed[!(p_needed %in% packages)]
