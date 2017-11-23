@@ -73,6 +73,9 @@ pnorm(warm77_olog$zeta[3], mean = sum(warm77_olog$coefficients * c(1, 1, 25, 15,
 
 ### Visualize predicted probabilities from  ordinal logit model -----------------------
 
+library(ZeligChoice)
+library(magrittr)
+
 # run model
 z_out <- zelig(warmf ~ male + white + age + ed + prst, data = workmom77, model = "ologit")
 summary(z_out)
